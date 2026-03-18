@@ -113,3 +113,72 @@ After visual inspection of the cluster result, a stricter final `eps` was used t
 ### Summary
 The knee/elbow-based tuning of `eps` provided a data-driven way to select DBSCAN parameters for both datasets.  
 The resulting cluster plots showed that the chosen values were suitable for separating the main above-ground structures and preparing the data for catenary cluster identification in Task 3.
+
+
+## Task 3 – Catenary Cluster Identification
+
+### Objective
+The goal of Task 3 is to identify the catenary cluster from the DBSCAN output after excluding the noise cluster.
+
+### Method
+After DBSCAN clustering, the noise cluster with label `-1` was ignored.  
+For each remaining cluster, the following values were computed:
+- `min(x)`
+- `max(x)`
+- `min(y)`
+- `max(y)`
+
+From these values, the cluster spans were calculated:
+- `x span = max(x) - min(x)`
+- `y span = max(y) - min(y)`
+
+The catenary cluster was identified as the largest valid cluster based on its `x-y` span.  
+Once the catenary cluster was selected, its bounding values were reported and the cluster was plotted separately for visual verification.
+
+---
+
+### Dataset 1
+
+**Selected catenary cluster label:** `0
+
+- `min(x)`: 26.498
+- `min(y)`: 80.019
+- `max(x)`: 62.379
+- `max(y)`: 159.960
+
+#### Catenary Plot
+![Dataset 1 Catenary Plot](images/dataset1_catenary_3d.png)
+
+#### Selected Cluster Check
+![Dataset 1 Selected Cluster Check](images/dataset1_selected_catenary_check.png)
+
+#### Observation
+For dataset 1, the selected cluster showed a large spatial span in the `x` and `y` directions and visually matched the catenary structure well.  
+The final selected cluster was clearly separated from the ground and most surrounding structures.
+
+---
+
+### Dataset 2
+
+**Selected catenary cluster label:** 6
+
+- `min(x)`: 10.179
+- `min(y)`: 0.043
+- `max(x)`: 37.007
+- `max(y)`: 79.976
+
+#### Catenary Plot
+![Dataset 2 Catenary Plot](images/dataset2_catenary_3d.png)
+
+#### Selected Cluster Check
+![Dataset 2 Selected Cluster Check](images/dataset2_selected_catenary_check.png)
+
+#### Observation
+For dataset 2, identifying the catenary cluster was more challenging because nearby elevated structures could merge during clustering.  
+After improving the clustering result, the selected cluster was validated visually to confirm that it represented the catenary structure as closely as possible.
+
+---
+
+### Summary
+The catenary cluster was identified by excluding the noise cluster and selecting the largest valid cluster using the `x-y` span criterion.  
+The final reported `min(x)`, `min(y)`, `max(x)`, and `max(y)` values describe the bounding extent of the detected catenary cluster in each dataset.
